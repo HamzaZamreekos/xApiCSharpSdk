@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using xApiCSharpSdk.IApiHandlers;
 using xApiCSharpSdk.Models;
-using xApiCSharpSdk.Requests.Responses;
+using xApiCSharpSdk.Responses;
 
 namespace xApiCSharpSdk.ApiHandlers
 {
@@ -17,8 +17,8 @@ namespace xApiCSharpSdk.ApiHandlers
             var serverHandler = RestService.For<IServerActionsHandler>("https://xapi.xtb.com");
             try
             {
-                var result = await serverHandler.PingServer(new ApiRequest() { command = "ping", streamSessionId= streamSessionId });
-                return new ServerResponse() 
+                var result = await serverHandler.PingServer(new ApiRequest() { Command = "ping", StreamSessionId = streamSessionId });
+                return new ServerResponse()
                 {
                     IsSuccess = true
                 };
