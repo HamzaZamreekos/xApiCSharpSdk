@@ -12,7 +12,7 @@ namespace xApiCSharpSdk.IApiHandlers
 {
     public interface IServerActionsHandler
     {
-        [Post("/ping ")]
+        [Post("/ping")]
         Task<ServerResponse> PingServer(ApiRequest ping);
     }
 }

@@ -12,11 +12,25 @@ namespace xApiCSharpSdk.ApiHandlers
 {
     public class ServerActionsManager
     {
-        public async Task<ServerResponse> PingServer()
+        public async Task<ServerResponse> PingServer(string streamSessionId)
         {
             var serverHandler = RestService.For<IServerActionsHandler>("https://xapi.xtb.com");
-            var result = await serverHandler.PingServer(new ApiRequest() { command = "ping" });
-            return result;
+            try
+            {
+                var result = await serverHandler.PingServer(new ApiRequest() { command = "ping", streamSessionId= streamSessionId });
+                return new ServerResponse() 
+                {
+                    IsSuccess = true
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return new ServerResponse()
+                {
+                    IsSuccess = false
+                };
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace xApiCSharpSdk.IApiHandlers
         Task<LoginResponse> LoginUser(ApiRequest<User> loginRequest);
         [Post("/logout")]
         Task<string> Logout(ApiRequest logoutRequest);
-        [Post("/logout")]
+        [Post("/getCurrentUserData")]
         Task<UserInfoResponse> GetUserInfo(ApiRequest infoRequest);
     }
 }

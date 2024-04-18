@@ -9,9 +9,11 @@ namespace xApiCSharpSdk.Models
     public class ApiRequest
     {
         public string command { get; set; }
+        public string? streamSessionId { get;set; }
     }
     public class ApiRequest<T> : ApiRequest
     {
         public T arguments { get; set; }
     }
 }
+//	"streamSessionId": "8469308861804289383"
