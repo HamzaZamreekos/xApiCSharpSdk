@@ -13,7 +13,7 @@ namespace xApiCSharpSdk.ApiHandlers
 {
     public class AccountManager
     {
-        public async Task<string> Login(string userId, string password)
+        public async Task<ServerResponse<string>> Login(string userId, string password)
         {
             var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com:5125");
             User userCredentials = new User()
@@ -31,29 +31,64 @@ namespace xApiCSharpSdk.ApiHandlers
                         arguments = userCredentials
                     });
                 if (!string.IsNullOrEmpty(loginResponse.streamSessionId))
-                    return loginResponse.streamSessionId;
+                    return new ServerResponse<string>()
+                    {
+                        IsSuccess = true,
+                        returnData = loginResponse.streamSessionId,
+                    };
                 else
-                    return string.Empty;
+                    return new ServerResponse<string>()
+                    {
+                        IsSuccess = false,
+                    };
             }
             catch(Exception ex)
             {
-                return string.Empty;
+                return new ServerResponse<string>()
+                {
+                    IsSuccess = false,
+                };
             }
         }
-        public async Task Logout()
+        public async Task<ServerResponse> Logout()
         {
-            var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com:5124");
-            await AccountHandler.Logout(new ApiRequest() { command= "logout"});
+            try
+            {
+                var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com:5124");
+                var result = await AccountHandler.Logout(new ApiRequest() { command= "logout"});
+                return new ServerResponse()
+                {
+                    IsSuccess = true,
+                    response = result
+                };
+            }
+            catch(Exception ex)
+            {
+                return new ServerResponse()
+                {
+                    IsSuccess = false,
+                };
+            }
         }
-        public async Task<UserInfoResponse> GetUserData()
+        public async Task<ServerResponse<UserInfoResponse>> GetUserData()
         {
-            var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com");
-            var result = await AccountHandler.GetUserInfo(new ApiRequest() { command = "getCurrentUserData" });
-            return result;
-        }
-        void test()
-        {
-
+            try
+            {
+                var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com");
+                var result = await AccountHandler.GetUserInfo(new ApiRequest() { command = "getCurrentUserData" });
+                return new ServerResponse<UserInfoResponse>()
+                {
+                    IsSuccess = true,
+                    returnData = result
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ServerResponse<UserInfoResponse>()
+                {
+                    IsSuccess = false
+                };
+            }
         }
     }
 }

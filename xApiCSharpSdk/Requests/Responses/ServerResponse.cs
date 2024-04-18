@@ -8,10 +8,11 @@ namespace xApiCSharpSdk.Requests.Responses
 {
     public class ServerResponse
     {
-        public bool status { get; set; }
+        public bool? IsSuccess { get; set; }
+        public string? response { get; set; }
     }
-    public class ServerResponse<T>
+    public class ServerResponse<T> : ServerResponse
     {
-        public T returnData { get; set; }
+        public T? returnData { get; set; }
     }
 }
