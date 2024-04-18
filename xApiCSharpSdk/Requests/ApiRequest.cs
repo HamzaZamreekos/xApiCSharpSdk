@@ -5,12 +5,13 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace xApiCSharpSdk.Models
+namespace xApiCSharpSdk.Requests
 {
     public class ApiRequest
     {
         [JsonPropertyName("command")]
         public string Command { get; set; }
+
         [JsonPropertyName("streamSessionId")]
         public string? StreamSessionId { get; set; }
     }

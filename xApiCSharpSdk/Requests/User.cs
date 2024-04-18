@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace xApiCSharpSdk.Models
+namespace xApiCSharpSdk.Requests
 {
     public class User
     {
