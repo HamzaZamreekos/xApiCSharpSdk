@@ -50,12 +50,12 @@ namespace xApiCSharpSdk.ApiHandlers
                 };
             }
         }
-        public async Task<ServerResponse> Logout()
+        public async Task<ServerResponse> Logout(string streamSessionId)
         {
             try
             {
                 var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com:5124");
-                var result = await AccountHandler.Logout(new ApiRequest() { command= "logout"});
+                var result = await AccountHandler.Logout(new ApiRequest() { command= "logout", streamSessionId = streamSessionId });
                 return new ServerResponse()
                 {
                     IsSuccess = true,
@@ -70,12 +70,12 @@ namespace xApiCSharpSdk.ApiHandlers
                 };
             }
         }
-        public async Task<ServerResponse<UserInfoResponse>> GetUserData()
+        public async Task<ServerResponse<UserInfoResponse>> GetUserData(string streamSessionId)
         {
             try
             {
                 var AccountHandler = RestService.For<IAccountHandler>("https://xapi.xtb.com");
-                var result = await AccountHandler.GetUserInfo(new ApiRequest() { command = "getCurrentUserData" });
+                var result = await AccountHandler.GetUserInfo(new ApiRequest() { command = "getCurrentUserData", streamSessionId = streamSessionId });
                 return new ServerResponse<UserInfoResponse>()
                 {
                     IsSuccess = true,
