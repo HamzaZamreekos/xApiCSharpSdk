@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace xApiCSharpSdk.Enums
 {
-    enum cmd
+    public enum Cmd
     {
         BUY,
         SELL,
